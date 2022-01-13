@@ -15,6 +15,7 @@ RUN apt-get update
 #防止Apache安装过程中地区设置出错
 ENV DEBIAN_FRONTEND noninteractive
 
+RUN apt-get install apt-utils -y
 #安装apache2
 RUN apt-get install apache2 -y
 
@@ -22,9 +23,9 @@ RUN apt-get install apache2 -y
 RUN apt-get install zip -y
 
 #安装php
-RUN apt-get install php7.4 -y
+RUN apt-get install php7.2 -y
 RUN apt-get install libapache2-mod-php -y --fix-missing
-RUN apt-get install php7.4-mysql -y
+RUN apt-get install php7.2-mysql -y
 
 #安装mysql
 RUN apt-get install mysql-server -y
@@ -38,7 +39,6 @@ RUN echo "ServerName localhost:80" >> /etc/apache2/apache2.conf
 
 #修改mysql文件读写
 RUN echo "secure_file_priv=''" >> /etc/mysql/mysql.conf.d/mysqld.cnf
-RUN service apparmor teardown
 RUN chown -R mysql:mysql /var/www/ctf
 RUN chmod 777 /var/www/ctf
 
