@@ -38,6 +38,8 @@ mysqladmin -u root password "root"
 mysql -uroot -proot -e "create database ctf;"
 mysql -uroot -proot ctf < /var/www/ctf/ctf.sql
 rm -rf /var/www/ctf/ctf.sql
+
+service mysql restart
 #重启apache2
 service apache2 restart
 

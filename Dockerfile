@@ -1,4 +1,4 @@
-FROM ubuntu:18.04
+FROM ubuntu:16.04
 
 MAINTAINER A1andNS "lilongxinalan@live.com"
 
@@ -23,9 +23,9 @@ RUN apt-get install apache2 -y
 RUN apt-get install zip -y
 
 #安装php
-RUN apt-get install php7.2 -y
+RUN apt-get install php7.0 -y
 RUN apt-get install libapache2-mod-php -y --fix-missing
-RUN apt-get install php7.2-mysql -y
+RUN apt-get install php7.0-mysql -y
 
 #安装mysql
 RUN apt-get install mysql-server -y
@@ -39,6 +39,7 @@ RUN echo "ServerName localhost:80" >> /etc/apache2/apache2.conf
 
 #修改mysql文件读写
 RUN echo "secure_file_priv=''" >> /etc/mysql/mysql.conf.d/mysqld.cnf
+RUN service apparmor teardown
 RUN chown -R mysql:mysql /var/www/ctf
 RUN chmod 777 /var/www/ctf
 
